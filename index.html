@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Cưới Online</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d4a9a0;
+            --secondary-color: #5a6268;
+            --light-color: #f9f7f7;
+            --dark-color: #333333;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        .section {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x1080') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        
+        .couple-name {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .wedding-date {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-outline-light {
+            border-width: 2px;
+            padding: 10px 30px;
+            font-size: 1.2rem;
+        }
+        
+        #couple {
+            background-color: white;
+        }
+        
+        .profile-card {
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid var(--primary-color);
+        }
+        
+        .love-story-timeline {
+            position: relative;
+        }
+        
+        .love-story-timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        #event {
+            background-color: var(--light-color);
+        }
+        
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .event-image {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .event-details {
+            padding: 20px;
+        }
+        
+        #gallery {
+            background-color: white;
+        }
+        
+        .gallery-item {
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        #rsvp {
+            background-color: var(--light-color);
+        }
+        
+        .form-control {
+            border-radius: 0;
+            border: 1px solid #ced4da;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 0;
+            padding: 10px 30px;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-color);
+            border-color: var(--dark-color);
+        }
+        
+        #wishes {
+            background-color: white;
+        }
+        
+        .wish-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        
+        .wish-author {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: white;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-30px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-15px) translateX(-50%);
+            }
+        }
+        
+        .navbar {
+            transition: background-color 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-transparent fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Thiệp Cưới</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hero">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#couple">Cô Dâu & Chú Rể</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#story">Câu Chuyện Tình Yêu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#event">Sự Kiện</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Thư Viện Ảnh</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#rsvp">RSVP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#wishes">Lời Chúc</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h1 class="couple-name animate__animated animate__fadeIn">Minh & Hương</h1>
+                    <p class="wedding-date animate__animated animate__fadeIn animate__delay-1s">15.06.2025</p>
+                    <p class="animate__animated animate__fadeIn animate__delay-2s">Trân trọng kính mời</p>
+                    <a href="#rsvp" class="btn btn-outline-light mt-4 animate__animated animate__fadeIn animate__delay-3s">Xác Nhận Tham Dự</a>
+                </div>
+            </div>
+        </div>
+        <a href="#couple" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Couple Section -->
+    <section id="couple" class="section">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-8 text-center">
+                    <h2 class="mb-4">Cô Dâu & Chú Rể</h2>
+                    <p>Chúng tôi rất vui mừng được chia sẻ khoảnh khắc đặc biệt này với bạn</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="profile-card">
+                        <img src="https://via.placeholder.com/400x400" alt="Cô dâu" class="profile-image">
+                        <h3>Nguyễn Thị Hương</h3>
+                        <p>Hương là một cô gái năng động và luôn mang lại niềm vui cho mọi người xung quanh. Cô ấy đang làm việc trong lĩnh vực marketing và có niềm đam mê lớn với ẩm thực và du lịch.</p>
+                        <div class="social-links mt-3">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                    <div class="text-center">
+                        <i class="fas fa-heart" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="profile-card">
+                        <img src="https://via.placeholder.com/400x400" alt="Chú rể" class="profile-image">
+                        <h3>Trần Văn Minh</h3>
+                        <p>Minh là một người đàn ông chân thành, luôn biết cách làm cho người khác cảm thấy đặc biệt. Anh ấy đang làm việc trong lĩnh vực công nghệ thông tin và thích chơi guitar trong thời gian rảnh.</p>
+                        <div class="social-links mt-3">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Story Section -->
+    <section id="story" class="section">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-8 text-center">
+                    <h2 class="mb-4">Câu Chuyện Tình Yêu</h2>
+                    <p>Hành trình tình yêu của chúng tôi</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="love-story-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>Lần Đầu Gặp Mặt</h3>
+                                <p class="date">15 Tháng 3, 2022</p>
+                                <p>Chúng tôi gặp nhau lần đầu tại một buổi hội thảo về công nghệ. Minh và Hương ngồi cạnh nhau và nhanh chóng bắt đầu trò chuyện về công việc và sở thích chung.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>Hẹn Hò Đầu Tiên</h3>
+                                <p class="date">2 Tháng 4, 2022</p>
+                                <p>Sau buổi hội thảo, Minh đã mạnh dạn mời Hương đi ăn tối. Buổi hẹn đầu tiên diễn ra tại một nhà hàng nhỏ ven hồ và kéo dài đến tận khuya với những câu chuyện dường như không bao giờ kết thúc.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>Chuyến Du Lịch Đầu Tiên</h3>
+                                <p class="date">10 Tháng 10, 2022</p>
+                                <p>Chúng tôi đã có chuyến du lịch đầu tiên cùng nhau đến Đà Lạt. Những ngày tuyệt vời giữa khung cảnh lãng mạn đã khiến cả hai hiểu rằng chúng tôi không thể sống thiếu nhau.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>Cầu Hôn</h3>
+                                <p class="date">20 Tháng 12, 2023</p>
+                                <p>Trong một buổi tối Giáng sinh, Minh đã bất ngờ quỳ gối và cầu hôn Hương dưới ánh đèn lung linh của cây thông Noel. Và tất nhiên, Hương đã nói "Có"!</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>Đám Cưới</h3>
+                                <p class="date">15 Tháng 6, 2025</p>
+                                <p>Và giờ đây, chúng tôi rất hạnh phúc được chia sẻ khoảnh khắc thiêng liêng này với tất cả những người thân yêu. Chúng tôi mong được gặp bạn trong ngày trọng đại!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Section -->
+    <section id="event" class="section">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-8 text-center">
+                    <h2 class="mb-4">Sự Kiện</h2>
+                    <p>Thông tin chi tiết về ngày trọng đại</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="event-card">
+                        <img src="https://via.placeholder.com/600x400" alt="Lễ cưới" class="event-image w-100">
+                        <div class="event-details">
+                            <h3>Lễ Thành Hôn</h3>
+                            <p><i class="fas fa-calendar-alt"></i> 15 Tháng 6, 2025</p>
+                            <p><i class="fas fa-clock"></i> 9:00 - 11:00 sáng</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Nhà Thờ Chánh Toà, 01 Ngô Gia Tự, Hà Nội</p>
+                            <p>Buổi lễ trang trọng sẽ diễn ra với sự chứng kiến của gia đình và bạn bè thân thiết.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="event-card">
+                        <img src="https://via.placeholder.com/600x400" alt="Tiệc cưới" class="event-image w-100">
+                        <div class="event-details">
+                            <h3>Tiệc Cưới</h3>
+                            <p><i class="fas fa-calendar-alt"></i> 15 Tháng 6, 2025</p>
+                            <p><i class="fas fa-clock"></i> 6:00 - 10:00 tối</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Khách Sạn Metropole, 15 Ngô Quyền, Hà Nội</p>
+                            <p>Buổi tiệc sẽ là khoảnh khắc chia sẻ niềm vui và hạnh phúc cùng tất cả quan khách. Xin vui lòng đến đúng giờ.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="event-card">
+                        <div class="event-details">
+                            <h3 class="text-center">Bản Đồ</h3>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14895.496514258266!2d105.84059267372527!3d21.02768323722666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2zSG_DoG4gS2nhur9tLCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1646536967016!5m2!1svi!2s" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-8 text-center">
+                    <h2 class="mb-4">Thư Viện Ảnh</h2>
+                    <p>Những khoảnh khắc đặc biệt của chúng tôi</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300" alt="Hình ảnh cặp đôi">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300" alt="Hình ảnh cặp đôi">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300" alt="Hình ảnh cặp đôi">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300" alt="Hình ảnh cặp đôi">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300" alt="Hình ảnh cặp đôi">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300" alt="Hình ảnh cặp đôi">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="section">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-8 text-center">
+                    <h2 class="mb-4">Xác Nhận Tham Dự</h2>
+                    <p>Xin vui lòng cho chúng tôi biết liệu bạn có thể tham dự đám cưới của chúng tôi không</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form id="rsvpForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="name" placeholder="Họ và tên" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" id="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="tel" class="form-control" id="phone" placeholder="Số điện thoại">
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control" id="guests" required>
+                                    <option value="">Số lượng khách</option>
+                                    <option value="1">1 người</option>
+                                    <option value="2">2 người</option>
+                                    <option value="3">3 người</option>
+                                    <option value="4">4 người</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select class="form-control" id="attending" required>
+                                    <option value="">Bạn sẽ tham dự?</option>
+                                    <option value="yes">Có, tôi sẽ tham dự</option>
+                                    <option value="no">Không, tôi không thể tham dự</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea class="form-control" id="message" rows="5" placeholder="Lời nhắn gửi đến cô dâu và chú rể"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary mt-3">Gửi</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wishes Section -->
+    <section id="wishes" class="section">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-8 text-center">
+                    <h2 class="mb-4">Lời Chúc</h2>
+                    <p>Những lời chúc tốt đẹp từ bạn bè và gia đình</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div id="wishesContainer">
+                        <!-- Wishes will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3>Minh & Hương</h3>
+                    <p>15.06.2025</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <p class="mt-4">&copy; 2025 MinhHuong Wedding. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar color change on scroll
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    document.querySelector('.navbar').classList.add('scrolled');
+                } else {
+                    document.querySelector('.navbar').classList.remove('scrolled');
+                }
+                
+                // Show/hide back to top button
+                if (window.scrollY > 300) {
+                    document.querySelector('.back-to-top').classList.add('show');
+                } else {
+                    document.querySelector('.back-to-top').classList.remove('show');
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    // Close navbar on mobile after clicking
+                    const navbarToggler = document.querySelector('.navbar-toggler');
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarToggler.click();
+                    }
+                });
+            });
+            
+            // Animation on scroll
+            const sections = document.querySelectorAll('.section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeIn');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // RSVP Form Submission
+            document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const guests = document.getElementById('guests').value;
+                const attending = document.getElementById('attending').value;
+                const message = document.getElementById('message').value;
+                
+                // You can send this data to a server or save it locally
+                // For this example, we'll add the message to the wishes section
+                if (message) {
+                    addWish(name, new Date().toLocaleDateString(), message);
+                    
+                    // Save to localStorage as an example
+                    saveWish(name, message);
+                }
+                
+                // Reset form
+                this.reset();
+                
+                // Show success message
+                alert('Cảm ơn bạn đã xác nhận tham dự!');
+            });
+            
+            // Function to add a wish to the UI
+            function addWish(author, date, message) {
+                const wishesContainer = document.getElementById('wishesContainer');
+                
+                const wishCard = document.createElement('div');
+                wishCard.className = 'wish-card animate__animated animate__fadeIn';
+                
+                wishCard.innerHTML = `
+                    <p>${message}</p>
+                    <p class="wish-author">- ${author} <small>(${date})</small></p>
+                `;
+                
+                wishesContainer.prepend(wishCard);
+            }
+            
+            // Function to save wish to localStorage
+            function saveWish(author, message) {
+                let wishes = JSON.parse(localStorage.getItem('wishes') || '[]');
+                
+                wishes.push({
+                    author: author,
+                    date: new Date().toLocaleDateString(),
+                    message: message
+                });
+                
+                localStorage.setItem('wishes', JSON.stringify(wishes));
+            }
+            
+            // Load wishes from localStorage
+            function loadWishes() {
+                let wishes = JSON.parse(localStorage.getItem('wishes') || '[]');
+                
+                wishes.forEach(wish => {
+                    addWish(wish.author, wish.date, wish.message);
+                });
+            }
+            
+            // Load wishes from CSV file
+            function loadWishesFromCSV() {
+                const csvFile = 'wishes.csv';
+                
+                fetch(csvFile)
+                    .then(response => response.text())
+                    .then(data => {
+                        const rows = data.split('\n');
+                        
+                        // Skip header row if present
+                        for (let i = 1; i < rows.length; i++) {
+                            if (rows[i].trim() === '') continue;
+                            
+                            const columns = rows[i].split(',');
+                            const author = columns[0];
+                            const date = columns[1];
+                            const message = columns[2];
+                            
+                            addWish(author, date, message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading wishes from CSV:', error);
+                        // If CSV loading fails, try to load from localStorage
+                        loadWishes();
+                    });
+            }
+            
+            // Try to load wishes from CSV first, fallback to localStorage
+            try {
+                loadWishesFromCSV();
+            } catch (error) {
+                loadWishes();
+            }
+        });
+    </script>
+</body>
+</html>
